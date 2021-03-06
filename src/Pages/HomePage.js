@@ -4,21 +4,17 @@ import { useState } from "react"
 
 
 
-function HomePage({list, setList, handleAdd, handleDelete,handleEdit,handleToSwitch}){
-
-    
-    
-      // function runningId(){
-      //   return list.id++
-      // }
-      
-
+function HomePage({list, setList, handleAdd, handleDelete,handleEdit,handleToSwitch, handleToSearch}){
  return( 
 
     <div>
-    <Header list={list}
-    handleAdd={handleAdd}/>
+    <Header 
+        list={list}
+        setList={setList}
+        handleAdd={handleAdd}
+        handleToSearch={handleToSearch}/>
     <Container
+        setList={setList}
         list={list}
         handleDelete={handleDelete}
         handleEdit={handleEdit} 

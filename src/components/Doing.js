@@ -1,8 +1,12 @@
 
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useHistory} from "react-router-dom"
 function Doing({item, handleDelete,handleEdit, index, handleToSwitch}){
-    
+let history = useHistory();
+   function handleEdit(){
+      history.push("/editpost")
+   }
  return(
     <div className="border border-secondary col-sm">
     
@@ -12,7 +16,7 @@ function Doing({item, handleDelete,handleEdit, index, handleToSwitch}){
     <span>{item.date}</span>
     </div>
     </div>
-    <button onClick={()=> handleEdit(item.id)}><FontAwesomeIcon icon={faEdit} /></button>
+    <button onClick={()=>handleEdit(item.id)}><FontAwesomeIcon icon={faEdit} /></button>
     <button onClick={()=> handleDelete(item.id)}><FontAwesomeIcon icon={faTrashAlt} /></button>
     <button onClick={()=> handleToSwitch(item.status='Todo')}>To do</button>
     <button onClick={()=> handleToSwitch(item.status='Done')}>Done</button>

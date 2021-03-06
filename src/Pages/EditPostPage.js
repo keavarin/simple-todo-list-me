@@ -4,18 +4,18 @@ import Header from "../components/Header"
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function AddPostPage({handleAdd, list}){
+function EditPostPage({list,setList ,handleEdit}){
     let history = useHistory()
 
    const [task, setTask] = useState('')
    const [date, setDate] = useState('')
-  
-    const dateID=() => {let date = new Date()
-        return date.getDay()+"/"+date.getMonth() +"/"+ date.getFullYear();}
+   
+    // const dateID=() => {let date = new Date()
+    //     return date.getDay()+"/"+date.getMonth() +"/"+ date.getFullYear();}
     
-    function handleAddForm(e) {
+    function handleEditForm(e) {
       e.preventDefault();
-      handleAdd({task: task, date : dateID(), status: 'Todo', id: list.[list.length-1].id+1})
+      setTask(list.task)
      
      history.push('/home')
     }
@@ -26,29 +26,31 @@ function AddPostPage({handleAdd, list}){
     function handleCancel(){
         history.push("/home")
     }
+    console.log(list.task)
+   
     return(
         <div>
-            <form onSubmit={handleAddForm}>
+            <form onSubmit={handleEditForm}>
             <Header/>
             <div className="container-fluid">
                 <div className="col justify-content-center">
-            <h5>Add List</h5>
+            <h5>Edit List</h5>
             <div>
                 <label htmlFor="task">Task</label>
             </div>
             <div>
                 <input id="task"
-                 type="text" value={list.task} onChange={handleTaskChange}></input>
+                 type="text" value={list.task} onChange={handleTaskChange}/>
             </div>
             <div>
                 <label htmlFor="date">Due Date</label>
             </div>
             <div>
-                {/* <input id="date"
-                type="text" value={list.date} onChange={handleDateChange}></input> */}
+                <input id="date"
+                type="date" ></input>
             </div>
             <div>
-                <button >Add</button>
+                <button >Edit</button>
                 <button onClick={handleCancel}>Cancel</button>
             </div>
             </div>
@@ -56,7 +58,8 @@ function AddPostPage({handleAdd, list}){
             </form>    
             
         </div>
+        
     )
 
 }
-export default AddPostPage;
+export default EditPostPage;
