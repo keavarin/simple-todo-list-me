@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 import { useHistory } from "react-router-dom";
 function Header({list, handleToSearch,setTs}) {
+
     let history = useHistory(); 
     const [text, setText]= useState('');
     const [searchTask, setSearchTask] = useState('')
@@ -17,9 +18,9 @@ function Header({list, handleToSearch,setTs}) {
     const handleSearch = ()=> {
     let searchList = list.filter(item => item.task.toLowerCase().includes(searchTask.toLowerCase()));
     handleToSearch(searchList)
-    setSearchTask(!searchTask);
-        if(searchTask) setTs(text);
-        else setTs('')
+    // setSearchTask(!searchTask);
+    //     if(searchTask) setTs(text);
+    //     else setTs('')
     }
 
     return (
