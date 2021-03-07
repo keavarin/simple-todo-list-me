@@ -15,7 +15,7 @@ function AddPostPage({handleAdd, list}){
     
     function handleAddForm(e) {
       e.preventDefault();
-      handleAdd({task: task, date : dateID(), status: 'Todo', id: list.[list.length-1].id+1})
+      handleAdd({task: task, date : dateID(), status: 'Todo', id: list[list.length-1].id+1})
      
      history.push('/home')
     }
@@ -48,7 +48,7 @@ function AddPostPage({handleAdd, list}){
                 type="text" value={list.date} onChange={handleDateChange}></input> */}
             </div>
             <div>
-                <button >Add</button>
+                <button type="submit">Add</button>
                 <button onClick={handleCancel}>Cancel</button>
             </div>
             </div>

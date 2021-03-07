@@ -1,13 +1,19 @@
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-function Todo({item, handleDelete, index, handleEdit, handleToSwitch}){
+import {useHistory} from "react-router-dom"
+function Todo({item, handleDelete, index, handleToSwitch}){
+    let history = useHistory();
+    function handleEdit(idToEdit){
+        history.push({ pathname:"/editpost",
+        state: { id: idToEdit }})
+     }
 
 return (
 
         <div className="border border-secondary col-sm">
        
         <div className="border-top">
-        <span>{item.task}</span>
+        <span> {item.id}: {item.task}</span>
         <div>
             <span>{item.date}</span>
         </div>

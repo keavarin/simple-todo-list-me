@@ -14,27 +14,23 @@ function App() {
     { id:2, task: 'Test2', status: "Doing", date: date() }, 
     { id:3, task: 'Test3', status: "Done", date: date() }
 ]);
-  
+  const [ts, setTs] =useState('')
 const handleDelete = (idToDelete) => {
   setList(list.filter((item, index) => item.id !== idToDelete))
 }
 
 const handleAdd = (newItem)=> {
   let newList = [...list, newItem]
- setList(newList)
-}
-const handleEdit = (idToEdit) => {
-  let newList = [...list, idToEdit]
   setList(newList)
-  // const textToEdit = prompt('Enter task');
-  setList(newList.map((item, index)=> idToEdit === item.id? {...item, task: item.task}: item))
+}
+const handleEdit = (taskToEdit) => {
+  setList(taskToEdit)
 }
 const handleToSwitch = (itemToEdit) => {
 setList(list.map((item)=> item.status === itemToEdit? {...item,status: itemToEdit}: item))
 }
 const handleToSearch = (itemToSearch)=>{
-  setList(list.filter((item)=> item.task === itemToSearch? {...item, task: item.task}:item))
-
+  setList(itemToSearch)
 }
   
   return (
@@ -42,7 +38,8 @@ const handleToSearch = (itemToSearch)=>{
     <BrowserRouter>
     <Switch> 
     <Route path="/home" component={HomePage} >
-      <HomePage list={list} setList={setList} handleAdd={handleAdd} 
+      <HomePage list={list} setList={setList} ts={ts} setTs={setTs}
+        handleAdd={handleAdd} 
         handleDelete={handleDelete}
         handleEdit={handleEdit} 
         handleToSwitch={handleToSwitch}

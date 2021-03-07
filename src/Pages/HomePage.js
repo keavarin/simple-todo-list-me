@@ -4,13 +4,15 @@ import { useState } from "react"
 
 
 
-function HomePage({list, setList, handleAdd, handleDelete,handleEdit,handleToSwitch, handleToSearch}){
+function HomePage({list, setList, handleAdd, handleDelete,handleEdit,handleToSwitch, handleToSearch, ts, setTs}){
  return( 
 
     <div>
     <Header 
         list={list}
         setList={setList}
+        ts={ts}
+        setTs={setTs}
         handleAdd={handleAdd}
         handleToSearch={handleToSearch}/>
     <Container

@@ -1,36 +1,42 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../components/Header"
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLocation } from 'react-router-dom';
 
 function EditPostPage({list,setList ,handleEdit}){
     let history = useHistory()
-
-   const [task, setTask] = useState('')
-   const [date, setDate] = useState('')
+    const location = useLocation();
+    const [date, setDate] = useState('')
+    
+    let tempTask = list.filter((item)=>item.id === location.state.id)[0].task; // nullable ป้องกันเวลา Object ส่งมาเป็น Null จะทำให้ไม่พัง
+    const [task, setTask] = useState(tempTask)
    
     // const dateID=() => {let date = new Date()
-    //     return date.getDay()+"/"+date.getMonth() +"/"+ date.getFullYear();}
-    
-    function handleEditForm(e) {
-      e.preventDefault();
-      setTask(list.task)
-     
-     history.push('/home')
-    }
+    // return date.getDay()+"/"+date.getMonth() +"/"+ date.getFullYear();}
     function handleTaskChange(e){
         setTask(e.target.value)
     }
+    
+    function handleEditForm(e) {
+        e.preventDefault();
+        list.map((item)=>{ 
+            if (item.id === location.state.id) item.task = task});
+        handleEdit(list)
+    
+        history.push('/home')
+    }
+
    
     function handleCancel(){
         history.push("/home")
     }
-    console.log(list.task)
-   
+    
     return(
-        <div>
-            <form onSubmit={handleEditForm}>
+        <div> 
+          <form onSubmit={handleEditForm}>
+           
             <Header/>
             <div className="container-fluid">
                 <div className="col justify-content-center">
@@ -40,7 +46,10 @@ function EditPostPage({list,setList ,handleEdit}){
             </div>
             <div>
                 <input id="task"
-                 type="text" value={list.task} onChange={handleTaskChange}/>
+                 type="text" 
+                 name="task" 
+                 value={task} 
+                 onChange={handleTaskChange}/>
             </div>
             <div>
                 <label htmlFor="date">Due Date</label>
@@ -50,7 +59,7 @@ function EditPostPage({list,setList ,handleEdit}){
                 type="date" ></input>
             </div>
             <div>
-                <button >Edit</button>
+                <button type="submit">Edit</button>
                 <button onClick={handleCancel}>Cancel</button>
             </div>
             </div>
