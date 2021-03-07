@@ -8,9 +8,11 @@ import { useLocation } from 'react-router-dom';
 function EditPostPage({list,setList ,handleEdit}){
     let history = useHistory()
     const location = useLocation();
-    const [date, setDate] = useState('')
     
     let tempTask = list.filter((item)=>item.id === location.state.id)[0].task; // nullable ป้องกันเวลา Object ส่งมาเป็น Null จะทำให้ไม่พัง
+    let tempDate = list.filter((item)=>item.id === location.state.id)[0].date; // nullable ป้องกันเวลา Object ส่งมาเป็น Null จะทำให้ไม่พัง
+    
+    const [date, setDate] = useState(tempDate)
     const [task, setTask] = useState(tempTask)
    
     // const dateID=() => {let date = new Date()
@@ -22,12 +24,15 @@ function EditPostPage({list,setList ,handleEdit}){
     function handleEditForm(e) {
         e.preventDefault();
         list.map((item)=>{ 
-            if (item.id === location.state.id) item.task = task});
+            if (item.id === location.state.id) item.task = task
+            else if(item.id === location.state.id) item.date = date});
         handleEdit(list)
     
         history.push('/home')
     }
-
+    function handleDateChange(e){
+        setDate(e.target.value)
+    }
    
     function handleCancel(){
         history.push("/home")
@@ -56,7 +61,9 @@ function EditPostPage({list,setList ,handleEdit}){
             </div>
             <div>
                 <input id="date"
-                type="date" ></input>
+                type="date"
+                value={date}
+                onChange={handleDateChange} ></input>
             </div>
             <div>
                 <button type="submit">Edit</button>

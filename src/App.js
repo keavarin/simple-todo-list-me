@@ -10,9 +10,9 @@ function App() {
     return date.getDay()+"/"+date.getMonth() +"/"+ date.getFullYear();}
     
   const [list, setList] = useState([
-    { id: 1, task: 'Test1', status: "Todo", date: date() }, 
-    { id:2, task: 'Test2', status: "Doing", date: date() }, 
-    { id:3, task: 'Test3', status: "Done", date: date() }
+    { id: 1, task: 'Test1', status: "Todo", date: '07/03/2021' }, 
+    { id:2, task: 'Test2', status: "Doing", date: '07/03/2021' }, 
+    { id:3, task: 'Test3', status: "Done", date: '07/03/2021' }
 ]);
   const [ts, setTs] =useState('')
 const handleDelete = (idToDelete) => {
@@ -30,6 +30,8 @@ const handleToSwitch = (itemToEdit) => {
 setList(list.map((item)=> item.status === itemToEdit? {...item,status: itemToEdit}: item))
 }
 const handleToSearch = (itemToSearch)=>{
+  let oldList = [...list]
+  
   setList(itemToSearch)
 }
   

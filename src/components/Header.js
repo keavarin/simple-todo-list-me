@@ -15,13 +15,20 @@ function Header({list, handleToSearch,setTs}) {
         setSearchTask(e.target.value)
     }
 
+    
     const handleSearch = ()=> {
-    let searchList = list.filter(item => item.task.toLowerCase().includes(searchTask.toLowerCase()));
-    handleToSearch(searchList)
-    // setSearchTask(!searchTask);
-    //     if(searchTask) setTs(text);
-    //     else setTs('')
+       let oldList = [...list]
+       let  newList = oldList.filter(item => item.task.toLowerCase().includes(searchTask.toLowerCase()));
+       //console.log(oldList)
+       if(searchTask == ''){
+       handleToSearch(oldList)
+       }else handleToSearch(newList)
     }
+    //console.log(newList)
+    // setSearchTask(!searchTask);
+    // if(!searchTask) setTs('');
+    //     else setTs('')
+
 
     return (
 
